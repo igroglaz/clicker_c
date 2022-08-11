@@ -1,3 +1,4 @@
 *.res
 .cbuilder/Win32
 *.exe
+*.local
