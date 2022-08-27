@@ -2,3 +2,4 @@
 .cbuilder/Win32
 *.exe
 *.local
+.cbuilder/__history/1.cbproj.local.~1~
