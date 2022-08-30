@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h> // milliseconds; while windows.h sleep() - seconds
+#include <ctype.h>
 
 // main game loop
 void game()
@@ -9,21 +11,29 @@ void game()
 
     // replace with setitimer()?
     time_t rawtime;
-    
-    while (rawtime % 2 || input != 'e')
+
+    while (input != 'e')
     {
+        int tick = 0;
+
+        time (&rawtime);
+        sleep(1);
+
         // ask what to do
-        if (rawtime % 10)
+        if (!(rawtime % 10) && !tick)
         {
+            tick++;
+
             printf("(R)un from monster!\n");
             // take player's input
             scanf("%c", &input);
             while (getchar() != '\n')
                 ; // clear buffer
+
             // confirm input and perform action
-            if (input == 'R')
+            if (tolower(input) == 'r')
             {
-                printf("You've managed to flee from goblin. You still got %d rocks.\n", ore);
+                printf("You've managed to flee from goblin. You still got %d ore.\n", ore);
             }
             else
             {
@@ -32,12 +42,11 @@ void game()
             }
         }
 
-        time (&rawtime);
-
-        if (!(rawtime % 2))
+        if (rawtime % 2)
         {
-            printf("You've managed to mine some ore.\n");
+            tick++;
             ore++;
+            printf("You've managed to mine some iron ore. Now you have %d ore.\n", ore);
         }
     }
 
