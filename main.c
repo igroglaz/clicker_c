@@ -57,7 +57,7 @@ void game()
 int main (void)
 {
     printf( "Welcome back to Idle Tangaria! Press 'e' to exit \n");
-    
+
     game();
 
     printf("Thanks for playing!\n");
